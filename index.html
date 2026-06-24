@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="专利法、专利法实施细则与专利审查指南在线检索阅读">
+  <title>专利法律规范查询</title>
+  <link rel="stylesheet" href="assets/styles.css?v=20260624-3">
+</head>
+<body>
+  <header class="topbar">
+    <button id="menuButton" class="icon-button mobile-only" type="button" aria-label="打开目录">☰</button>
+    <nav id="documentTabs" class="document-tabs" aria-label="法规切换"></nav>
+    <div class="contact-menu">
+      <button id="contactToggle" class="contact-toggle" type="button" aria-expanded="false" aria-controls="contactPopover">交流与关注</button>
+      <section id="contactPopover" class="contact-popover" hidden>
+        <div class="contact-popover-heading">
+          <strong>交流与关注</strong>
+          <button id="closeContact" class="icon-button" type="button" aria-label="关闭交流与关注">×</button>
+        </div>
+        <div class="qr-grid">
+          <figure class="qr-card">
+            <div class="qr-image-frame"><img src="assets/images/jingzhi-public-qr.png" alt="璟知创新与专利公众号二维码"></div>
+            <figcaption>璟知创新与专利<br><small>微信公众号</small></figcaption>
+          </figure>
+          <figure class="qr-card">
+            <div class="qr-image-frame personal-qr-frame"><img src="assets/images/personal-wechat-qr.jpg" alt="个人微信二维码"></div>
+            <figcaption>个人微信<br><small>欢迎交流</small></figcaption>
+          </figure>
+        </div>
+        <p>本网站为便捷查询和使用专利法规而设计。欢迎关注“璟知创新与专利”公众号，获取专利实务与行业内容；也欢迎添加个人微信交流。愿我们持续学习、彼此启发，在专利行业不断精进。</p>
+      </section>
+    </div>
+    <div class="top-actions">
+      <button id="fontDown" class="icon-button" type="button" aria-label="缩小字号">A−</button>
+      <button id="fontUp" class="icon-button" type="button" aria-label="增大字号">A＋</button>
+      <label class="palette-control" for="paletteSelect"><span>页面配色</span>
+        <select id="paletteSelect" aria-label="页面配色">
+          <option value="paper">米白</option>
+          <option value="white">明亮</option>
+          <option value="green">护眼绿</option>
+          <option value="dark">深色</option>
+        </select>
+      </label>
+    </div>
+  </header>
+
+  <div class="searchbar">
+    <div class="search-field">
+      <label for="pageSearch">当前页面搜索</label>
+      <input id="pageSearch" type="search" placeholder="查找条文或关键词" autocomplete="off">
+      <span id="pageSearchCount" class="search-count"></span>
+      <button id="previousMatch" type="button" aria-label="上一个结果">↑</button>
+      <button id="nextMatch" type="button" aria-label="下一个结果">↓</button>
+    </div>
+    <div class="search-field global-field">
+      <label for="globalSearch">全局搜索</label>
+      <input id="globalSearch" type="search" placeholder="同时搜索三份文件" autocomplete="off">
+      <button id="globalSearchButton" type="button">搜索</button>
+    </div>
+  </div>
+
+  <div id="layout" class="layout">
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-heading">
+        <strong>目录</strong>
+        <button id="closeMenu" class="icon-button mobile-only" type="button" aria-label="关闭目录">×</button>
+      </div>
+      <nav id="toc" class="toc" aria-label="当前文件目录"></nav>
+    </aside>
+
+    <main class="main">
+      <section id="documentMeta" class="document-meta"></section>
+      <article id="document" class="document" aria-live="polite"></article>
+      <section id="developer" class="developer-card"></section>
+    </main>
+
+    <aside id="globalResults" class="global-results" hidden>
+      <div class="results-heading">
+        <strong>全局搜索结果</strong>
+        <button id="closeResults" class="icon-button" type="button" aria-label="关闭搜索结果">×</button>
+      </div>
+      <div id="globalResultsBody"></div>
+    </aside>
+  </div>
+
+  <button id="backToTop" class="back-to-top" type="button" aria-label="返回顶部">↑</button>
+  <script defer src="assets/content-data.js?v=20260624-1"></script>
+  <script defer src="assets/app.js?v=20260624-5"></script>
+</body>
+</html>
