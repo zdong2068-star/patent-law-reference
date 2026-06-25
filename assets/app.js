@@ -32,6 +32,30 @@ const escapeHtml = (value) => value
 const escapeRegex = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const normalize = (value) => value.toLocaleLowerCase('zh-CN').replace(/[\s，。；：、（）()《》〈〉“”‘’·—-]+/g, '');
 
+function stripIntroNotes(markdown) {
+  const lines = markdown.replace(/\r/g, '').split('\n');
+  const output = [];
+  let afterFirstHeading = false;
+  let skipping = false;
+  for (const line of lines) {
+    if (!afterFirstHeading) {
+      output.push(line);
+      if (/^#\s+/.test(line.trim())) {
+        afterFirstHeading = true;
+        skipping = true;
+      }
+      continue;
+    }
+    if (skipping) {
+      const trimmed = line.trim();
+      if (!trimmed || trimmed.startsWith('> ') || trimmed.startsWith('- ') || trimmed === '---') continue;
+      skipping = false;
+    }
+    output.push(line);
+  }
+  return output.join('\n').replace(/\n{3,}/g, '\n\n');
+}
+
 function parseMarkdown(markdown, highlight = '') {
   const headings = [];
   const searchable = [];
@@ -78,6 +102,12 @@ function parseMarkdown(markdown, highlight = '') {
       headings.push({ level, text, id });
       searchable.push({ heading: text, text });
       html.push(`<h${level} id="${id}">${decorate(text)}</h${level}>`);
+    } else if (/^!\[[^\]]*]\([^)]+\)$/.test(line)) {
+      flushParagraph(); flushQuote(); closeList();
+      const image = line.match(/^!\[([^\]]*)]\(([^)]+)\)$/);
+      const alt = image[1];
+      const src = image[2];
+      html.push(`<figure class="guide-image"><img src="${escapeHtml(src)}" alt="${escapeHtml(alt)}"><figcaption>${escapeHtml(alt)}</figcaption></figure>`);
     } else if (line === '---') {
       flushParagraph(); flushQuote(); closeList(); html.push('<hr>');
     } else if (line.startsWith('> ')) {
@@ -121,12 +151,12 @@ function updateHash(section = '') {
 async function showDocument(id, options = {}) {
   const descriptor = state.manifest.documents.find((item) => item.id === id) || state.manifest.documents[0];
   state.activeId = descriptor.id;
-  const markdown = await loadDocument(descriptor.id);
+  const markdown = stripIntroNotes(await loadDocument(descriptor.id));
   state.rendered = parseMarkdown(markdown, options.highlight || '');
   elements.article.innerHTML = state.rendered.html;
   document.title = `${descriptor.title}｜${state.manifest.siteTitle}`;
   const sourceUrl = (() => { try { const url = new URL(descriptor.source); return ['http:', 'https:'].includes(url.protocol) ? url.href : ''; } catch { return ''; } })();
-  elements.meta.innerHTML = `${escapeHtml(descriptor.version)}${sourceUrl ? ` · <a href="${escapeHtml(sourceUrl)}" target="_blank" rel="noopener">${escapeHtml(descriptor.sourceLabel || '官方来源')}</a>` : ''}`;
+  elements.meta.innerHTML = '';
   elements.tabs.querySelectorAll('button').forEach((button) => button.setAttribute('aria-current', button.dataset.id === descriptor.id ? 'page' : 'false'));
   renderToc();
   state.matches = [...elements.article.querySelectorAll('mark')];

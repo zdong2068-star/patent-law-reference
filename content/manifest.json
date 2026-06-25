@@ -1,33 +1,33 @@
 {
   "siteTitle": "专利法律规范查询",
-  "updatedAt": "2026-06-24",
+  "updatedAt": "2026-06-25",
   "documents": [
     {
       "id": "patent-law",
       "shortTitle": "专利法",
       "title": "专利法",
       "file": "patent-law.md",
-      "version": "《中华人民共和国专利法》2020年修正，2021年6月1日起施行",
-      "sourceLabel": "中国政府网：专利法修改决定",
-      "source": "https://www.gov.cn/xinwen/2020-10/18/content_5552102.htm"
+      "version": "",
+      "sourceLabel": "",
+      "source": ""
     },
     {
       "id": "implementation-rules",
       "shortTitle": "专利法实施细则",
       "title": "专利法实施细则",
       "file": "implementation-rules.md",
-      "version": "《中华人民共和国专利法实施细则》2023年修订，2024年1月20日起施行",
-      "sourceLabel": "中国政府网：国务院修改决定",
-      "source": "https://www.gov.cn/zhengce/content/202312/content_6921633.htm"
+      "version": "",
+      "sourceLabel": "",
+      "source": ""
     },
     {
       "id": "examination-guidelines",
       "shortTitle": "专利审查指南",
       "title": "专利审查指南",
       "file": "examination-guidelines.md",
-      "version": "2023年版（局令第78号），按2025年修改决定（局令第84号）整合；修改自2026年1月1日起施行",
-      "sourceLabel": "国家知识产权局：第84号令",
-      "source": "https://www.cnipa.gov.cn/art/2025/11/13/art_99_202568.html"
+      "version": "",
+      "sourceLabel": "",
+      "source": ""
     }
   ],
   "developer": {
